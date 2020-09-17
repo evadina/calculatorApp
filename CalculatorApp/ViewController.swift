@@ -16,7 +16,6 @@ class ViewController: UIViewController {
     
     @IBAction func digitPressed(_ sender: UIButton) {
         let current_digit = sender.currentTitle!
-        
         if typing{
         let current_display = myDisplay.text!
         myDisplay.text = current_display + current_digit
@@ -27,7 +26,7 @@ class ViewController: UIViewController {
     }
     
     
-    var displayValue: Double {
+    var displayValue: Double{
         get{
             return Double(myDisplay.text!)!
         }

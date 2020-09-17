@@ -9,7 +9,6 @@
 import Foundation
 
 enum Operations{
-    case constant(Double)
     case unaryOperation((Double)->Double)
     case binaryOperation((Double, Double)->Double)
     case equals
@@ -52,8 +51,8 @@ struct CalculatorModel{
         let symbol = my_operations[operation]!
         switch symbol{
             
-        case .constant(let value):
-            global_value = value
+//        case .constant(let value):
+//            global_value = value
             
         case .unaryOperation(let function):
             global_value = function(global_value!)
@@ -73,13 +72,14 @@ struct CalculatorModel{
             
       //  case .concat:
       //      global_value = global_value! +
+        
         }
     }
     
-    func doubleChecker()->Bool{
-        
-        return true
-    }
+//    func doubleChecker()->Bool{
+//
+//        return true
+//    }
     
     
     
@@ -101,8 +101,4 @@ struct CalculatorModel{
             
         }
     }
-    
-    
-    
-    
 }
