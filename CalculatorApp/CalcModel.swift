@@ -16,15 +16,16 @@ enum Operations{
     case negative
 }
 
-
-func concat(op1: Double, op2: Double)-> Double{
-    let op1string = String(op1)
-    let op2string = String(op2)
-    let fullNumberWithDotInString = op1string + "." + op2string
-    let fullNumberWithDotInDouble = Double(fullNumberWithDotInString)
-    return fullNumberWithDotInDouble!
-}
-
+//func concat(op1: Double, op2: Double)-> Double{
+//    let op1string = String(op1)
+//    let op2string = String(op2)
+//    let fullNumberWithDotInString = op1string + "." + op2string
+//    let fullNumberWithDotInDouble = Double(fullNumberWithDotInString)
+//    return fullNumberWithDotInDouble!
+//}
+//func percentage(op1: Double)->Double{
+//       return op1/100.0
+//   }
 
 struct CalculatorModel{
     
@@ -35,11 +36,12 @@ struct CalculatorModel{
             "-":    Operations.binaryOperation({$0-$1}),
             "×":    Operations.binaryOperation({$0*$1}),
             "÷":    Operations.binaryOperation({$0/$1}),
-            ".":    Operations.binaryOperation(concat),
+            "%":    Operations.unaryOperation({$0/100.0}),
             "=":    Operations.equals,
-            "C":    Operations.clear,
+            "AC":    Operations.clear,
     ]
     
+
     private var global_value: Double?
     
     mutating func setOperand(_ operand: Double){
@@ -50,38 +52,36 @@ struct CalculatorModel{
     mutating func performOPeration(_ operation: String){
         let symbol = my_operations[operation]!
         switch symbol{
-            
-//        case .constant(let value):
-//            global_value = value
-            
+        
         case .unaryOperation(let function):
             global_value = function(global_value!)
             
         case .binaryOperation(let function):
             saving = SaveFirstOperandAndOperation(firstOperand: global_value!, operation: function)
+        case .clear:
+            global_value = 0
+                       
+        case .negative:
+            global_value = global_value!*(-1)
             
         case .equals:
             if global_value != nil {
                 global_value = saving?.performOperationWith(secondOperand: global_value!)
             }
-        case .clear:
-            global_value = 0
-            
-        case .negative:
-            global_value = global_value!*(-1)
-            
-      //  case .concat:
-      //      global_value = global_value! +
+       
+//
+//        case .concat:
+//         global_value = global_value! +
+//        case .constant(let value):
+//                        global_value = value
         
+    
         }
     }
-    
 //    func doubleChecker()->Bool{
 //
 //        return true
 //    }
-    
-    
     
     var result: Double? {
         get{

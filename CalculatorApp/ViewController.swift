@@ -24,8 +24,7 @@ class ViewController: UIViewController {
             typing = true
         }
     }
-    
-    
+        
     var displayValue: Double{
         get{
             return Double(myDisplay.text!)!
@@ -33,7 +32,6 @@ class ViewController: UIViewController {
         set{
             myDisplay.text = String(newValue)
         }
-        
     }
     
     private var calculatorModel = CalculatorModel()
@@ -41,10 +39,7 @@ class ViewController: UIViewController {
         calculatorModel.setOperand(displayValue)
         calculatorModel.performOPeration(sender.currentTitle!)
         displayValue = calculatorModel.result!
-
         typing = false
     }
-    
-    
 }
 
